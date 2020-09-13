@@ -27,7 +27,7 @@
               <td class="text-right">
                 <b-icon-add v-if="formBill.id == null " :click="createBill" />
                 <b-icon-edit v-if="formBill.id != null" :click="updateBill" />
-                <b-icon-cancel v-if="formBill.id != null" :click="resetFromBill" />
+                <b-icon-cancel :click="resetFromBill" />
               </td>
               <td />
             </tr>
@@ -77,7 +77,8 @@ export default {
     createBill () {
       this.$axios.post(process.env.VUE_BASE_URL + '/api/bill/', this.formBill).then((res) => {
         this.getBillAll()
-        this.$toast.success('ทำรายการ]สำเร็จ')
+        this.resetFromBill()
+        this.$toast.success('ทำรายการสำเร็จ')
       })
     },
     getBillByIndex (index) {
@@ -91,7 +92,7 @@ export default {
     updateBill () {
       this.$axios.put(`${process.env.VUE_BASE_URL}/api/bill/${this.formBill.id}`, this.formBill).then((res) => {
         this.getBillAll()
-        this.$toast.success('ทำรายการ]สำเร็จ')
+        this.$toast.success('ทำรายการสำเร็จ')
         this.resetFromBill()
       })
     },
