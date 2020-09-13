@@ -2,15 +2,14 @@
 FROM node:lts-alpine
 
 # create destination directory
-RUN mkdir -p /usr/src/hm2-client
-WORKDIR /usr/src/hm2-client
-
+RUN mkdir -p /usr/src/bill-frontend
+WORKDIR /usr/src/bill-frontend
 # update and install dependency
 RUN apk update && apk upgrade
 RUN apk add git
 
 # copy the app, note .dockerignore
-COPY . /usr/src/hm2-client/
+COPY . /usr/src/bill-frontend/
 
 
 RUN npm install

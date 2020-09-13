@@ -4,8 +4,8 @@ version: "3"
 services:
   nuxt:
     build: ./
-    image: hm2-image
-    container_name: hm2-app
+    image: bill-image
+    container_name: bill-frontend
     restart: always
     ports:
       - "4000:3000"
