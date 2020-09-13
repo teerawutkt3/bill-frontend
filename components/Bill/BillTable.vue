@@ -77,6 +77,7 @@ export default {
     createBill () {
       this.$axios.post(process.env.VUE_BASE_URL + '/api/bill/', this.formBill).then((res) => {
         this.getBillAll()
+        this.resetFromBill()
         this.$toast.success('ทำรายการสำเร็จ')
       })
     },
