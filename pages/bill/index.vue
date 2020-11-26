@@ -2,9 +2,7 @@
   <div>
     <v-row>
       <v-col>
-        <b class="float-left">
-          Bill
-        </b>
+        <b class="float-left"> Bill </b>
         {{ nowDate }}
         <v-btn @click="noti">
           noti
@@ -22,15 +20,22 @@
         lg="3"
         xl="3"
       >
-        <BillCard :title="bill.title" :type="bill.type" :cost="bill.cost" :click="()=>{onPay(index)}" />
+        <BillCard
+          :title="bill.title"
+          :type="bill.type"
+          :cost="bill.cost"
+          :click="
+            () => {
+              onPay(index);
+            }
+          "
+        />
       </v-col>
     </v-row>
     <hr>
     <v-row>
       <v-col>
-        <h3>
-          Payed
-        </h3>
+        <h3>Payed</h3>
       </v-col>
     </v-row>
     <v-row>
@@ -43,7 +48,16 @@
         lg="3"
         xl="3"
       >
-        <BillCard :title="bill.title" :type="bill.description" :cost="bill.amount" :click="()=>{onPay(index)}" />
+        <BillCard
+          :title="bill.title"
+          :type="bill.description"
+          :cost="bill.amount"
+          :click="
+            () => {
+              onPay(index);
+            }
+          "
+        />
       </v-col>
     </v-row>
   </div>
@@ -67,6 +81,7 @@ export default {
   methods: {
     getBillAll () {
       this.$axios.get(process.env.VUE_BASE_URL + '/api/bill/').then((res) => {
+        console.log('res:', res.data)
         this.billList = res.data
       })
     },
@@ -75,6 +90,14 @@ export default {
     },
     goForm () {
       this.$router.push({ path: '/bill/b-form' })
+    },
+    noti () {
+      this.$axios(process.env.VUE_BASE_URL + '/authenticate', {
+        username: 'topadmin',
+        password: 'topadmin'
+      }).then((res) => {
+        console.log('login: ', res)
+      })
     }
   }
 }
