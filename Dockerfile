@@ -1,16 +1,10 @@
 # Dockerfile
-FROM node:lts-alpine
-
-# create destination directory
-RUN mkdir -p /usr/src/bill-frontend
-WORKDIR /usr/src/bill-frontend
-# update and install dependency
-RUN apk update && apk upgrade
-RUN apk add git
-
-# copy the app, note .dockerignore
-COPY . /usr/src/bill-frontend/
-
+FROM node:10.15.0 as build-stage
+WORKDIR /home/app
+# ENV PATH /home/app/node_modules/.bin:$PATH
+COPY package*.json ./
+RUN npm install -g @vue/cli
+COPY . /home/app
 
 RUN npm install
 RUN npm run build
